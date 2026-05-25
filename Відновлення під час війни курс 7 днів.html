@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Відновлення та пошук себе — 7-денний курс</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose:     #B5294A;
+    --rose-s:   #8C1F38;
+    --rose-t:   #F5E6EA;
+    --rose-m:   #F0D2DA;
+    --teal:     #2C7A6E;
+    --teal-t:   #E2F0EE;
+    --gold:     #9A7320;
+    --gold-t:   #FBF5E6;
+    --warm:     #5C3D2E;
+    --cream:    #FDF8F4;
+    --grey:     #3E3530;
+    --light:    #F9F4F0;
+    --border:   #E8DDD5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--grey);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── TYPOGRAPHY ─────────────────────────────────────── */
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+  h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; line-height: 1.25; }
+
+  /* ── HERO ────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #1a0a10 0%, #2E0F1C 40%, #1C3530 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 24px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(181,41,74,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(44,122,110,0.15) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 30% at 50% 50%, rgba(154,115,32,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--rose); opacity: 0.85;
+    border: 1px solid rgba(181,41,74,0.35);
+    border-radius: 2px;
+    padding: 6px 18px;
+    margin-bottom: 36px;
+    display: inline-block;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 300;
+    color: #F5E6EA;
+    letter-spacing: 0.01em;
+    max-width: 860px;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+
+  .hero h1 em { font-style: italic; color: #FCCED9; font-weight: 300; }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 300; font-style: italic;
+    color: rgba(255,255,255,0.55);
+    max-width: 580px;
+    margin: 28px auto 0;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+
+  .hero-divider {
+    width: 48px; height: 1px;
+    background: rgba(181,41,74,0.5);
+    margin: 44px auto;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .hero-details {
+    display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 1s ease 0.35s both;
+  }
+
+  .hero-detail {
+    font-size: 13px; font-weight: 300; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+  }
+
+  .hero-detail span { color: rgba(255,255,255,0.75); font-weight: 400; }
+
+  .hero-cta {
+    margin-top: 52px;
+    animation: fadeUp 1s ease 0.45s both;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 16px 52px;
+    background: var(--rose);
+    color: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--rose-s); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-block;
+    padding: 15px 48px;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.7);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    margin-left: 16px;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SHARED LAYOUT ───────────────────────────────────── */
+  .section { padding: 100px 24px; }
+  .container { max-width: 960px; margin: 0 auto; }
+  .container-sm { max-width: 720px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--rose);
+    margin-bottom: 18px; display: block;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400; color: var(--warm);
+    margin-bottom: 28px;
+  }
+
+  .section-text {
+    font-size: 17px; font-weight: 300;
+    color: #5A4840; line-height: 1.8;
+  }
+
+  /* ── FOR WHOM ────────────────────────────────────────── */
+  .for-whom { background: var(--light); }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px; margin-top: 56px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 36px 30px;
+    position: relative;
+    transition: box-shadow 0.3s;
+  }
+  .card:hover { box-shadow: 0 8px 32px rgba(90,40,30,0.08); }
+
+  .card-icon { font-size: 28px; margin-bottom: 18px; display: block; }
+
+  .card p {
+    font-size: 16px; font-weight: 300;
+    color: #5A4840; line-height: 1.7;
+  }
+
+  /* ── ABOUT ───────────────────────────────────────────── */
+  .about { background: var(--cream); }
+
+  .quote-block {
+    border-left: 3px solid var(--rose);
+    padding: 24px 32px;
+    background: var(--rose-t);
+    margin: 48px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .quote-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic;
+    font-weight: 400; color: var(--warm);
+    line-height: 1.6;
+  }
+
+  /* ── PROGRAM ─────────────────────────────────────────── */
+  .program { background: var(--light); }
+
+  .days-list { margin-top: 52px; display: flex; flex-direction: column; gap: 0; }
+
+  .day-item {
+    display: flex; gap: 28px; align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .day-item:last-child { border-bottom: none; }
+
+  .day-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px; font-weight: 300;
+    color: var(--rose); opacity: 0.35;
+    min-width: 52px; line-height: 1;
+    padding-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .day-content { flex: 1; }
+
+  .day-emoji { font-size: 20px; margin-bottom: 6px; display: block; }
+
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 500;
+    color: var(--warm); margin-bottom: 8px;
+  }
+
+  .day-desc {
+    font-size: 15px; font-weight: 300; color: #5A4840; line-height: 1.6;
+  }
+
+  .day-tag {
+    display: inline-block; margin-top: 10px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--teal);
+    background: var(--teal-t);
+    padding: 3px 10px; border-radius: 2px;
+  }
+
+  /* ── RESULTS ─────────────────────────────────────────── */
+  .results { background: var(--cream); }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px; margin-top: 52px;
+  }
+
+  .result-item {
+    padding: 28px;
+    border-top: 2px solid var(--rose);
+    background: #fff;
+  }
+
+  .result-item h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 500; color: var(--rose);
+    margin-bottom: 10px;
+  }
+
+  .result-item p {
+    font-size: 15px; font-weight: 300; color: #5A4840; line-height: 1.6;
+  }
+
+  /* ── WHAT'S INCLUDED ─────────────────────────────────── */
+  .includes { background: linear-gradient(160deg, #1a0a10 0%, #2E0F1C 100%); }
+
+  .includes .section-eyebrow { color: rgba(252,206,217,0.7); }
+  .includes .section-title { color: #F5E6EA; }
+
+  .includes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px; margin-top: 52px;
+  }
+
+  .include-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 32px 28px;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .include-card .icon { font-size: 32px; margin-bottom: 18px; display: block; }
+
+  .include-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 400; color: #FCCED9;
+    margin-bottom: 10px;
+  }
+
+  .include-card p {
+    font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6;
+  }
+
+  /* ── PRICING ─────────────────────────────────────────── */
+  .pricing { background: var(--light); padding: 100px 24px; }
+
+  .pricing-card {
+    max-width: 480px; margin: 0 auto;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 52px 48px;
+    text-align: center;
+    box-shadow: 0 12px 48px rgba(90,40,30,0.08);
+    margin-top: 52px;
+  }
+
+  .pricing-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 400; color: var(--warm);
+    margin-bottom: 8px;
+  }
+
+  .pricing-sub { font-size: 14px; color: #9A8880; margin-bottom: 36px; }
+
+  .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 60px; font-weight: 300; color: var(--rose);
+    line-height: 1;
+  }
+
+  .price-currency { font-size: 28px; vertical-align: top; margin-top: 12px; display: inline-block; }
+
+  .price-note { font-size: 13px; color: #9A8880; margin: 12px 0 36px; }
+
+  .pricing-features { text-align: left; margin-bottom: 36px; }
+
+  .pricing-feature {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px; font-weight: 300; color: #5A4840;
+  }
+  .pricing-feature:last-child { border-bottom: none; }
+
+  .pricing-feature .check { color: var(--teal); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  .btn-cta {
+    display: block; width: 100%;
+    padding: 18px;
+    background: var(--rose);
+    color: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; text-align: center;
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+  .btn-cta:hover { background: var(--rose-s); }
+
+  .guarantee {
+    margin-top: 20px;
+    font-size: 13px; font-weight: 300; color: #9A8880;
+    font-style: italic;
+  }
+
+  /* ── FAQ ─────────────────────────────────────────────── */
+  .faq { background: var(--cream); }
+
+  .faq-list { margin-top: 52px; display: flex; flex-direction: column; gap: 0; }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0;
+  }
+
+  .faq-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500; color: var(--warm);
+    margin-bottom: 14px;
+  }
+
+  .faq-a {
+    font-size: 16px; font-weight: 300; color: #5A4840; line-height: 1.7;
+  }
+
+  /* ── FOOTER CTA ──────────────────────────────────────── */
+  .footer-cta {
+    background: linear-gradient(160deg, #1a0a10 0%, #2E0F1C 100%);
+    text-align: center;
+    padding: 120px 24px;
+  }
+
+  .footer-cta h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300; color: #F5E6EA;
+    max-width: 700px; margin: 0 auto 24px;
+  }
+
+  .footer-cta h2 em { font-style: italic; color: #FCCED9; }
+
+  .footer-cta p {
+    font-size: 18px; font-weight: 300; font-style: italic;
+    color: rgba(255,255,255,0.45);
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 48px;
+  }
+
+  footer {
+    background: #0F0508;
+    padding: 32px 24px;
+    text-align: center;
+    font-size: 13px; color: rgba(255,255,255,0.3);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── SALES COPY SECTION ──────────────────────────────── */
+  .sales-copy {
+    background: var(--gold-t);
+    border-top: 3px solid var(--gold);
+    padding: 80px 24px;
+  }
+
+  .sales-copy .section-eyebrow { color: var(--gold); }
+  .sales-copy .section-title { color: var(--warm); }
+
+  .sales-block {
+    background: #fff;
+    border: 1px solid #E8DDD0;
+    border-radius: 4px;
+    padding: 48px 52px;
+    margin-top: 40px;
+    position: relative;
+  }
+
+  .sales-block::before {
+    content: attr(data-label);
+    position: absolute; top: -12px; left: 32px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    background: #fff;
+    padding: 0 12px;
+  }
+
+  .sales-block p {
+    font-size: 16px; font-weight: 300; color: #5A4840;
+    line-height: 1.85; margin-bottom: 18px;
+  }
+  .sales-block p:last-child { margin-bottom: 0; }
+
+  .sales-block p strong {
+    font-weight: 500; color: var(--warm);
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .btn-outline { display: none; }
+    .day-item { gap: 16px; }
+    .day-num { font-size: 32px; min-width: 40px; }
+    .sales-block { padding: 36px 28px; }
+    .pricing-card { padding: 40px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HERO -->
+<section class="hero">
+  <span class="hero-tag">7-денний онлайн-курс</span>
+  <h1>Відновлення та пошук себе<br><em>під час війни</em></h1>
+  <p class="hero-sub serif">Повернення себе — маленькими кроками, без тиску, з теплом</p>
+  <div class="hero-divider"></div>
+  <div class="hero-details">
+    <div class="hero-detail"><span>7</span> відеоуроків</div>
+    <div class="hero-detail"><span>До 10 хв</span> на день</div>
+    <div class="hero-detail"><span>Робочий</span> зошит</div>
+    <div class="hero-detail"><span>Довічний</span> доступ</div>
+  </div>
+  <div class="hero-cta">
+    <a href="https://secure.wayforpay.com/button/b1480fc3d1ff4" class="btn-primary">Приєднатись до курсу</a>
+    <a href="#program" class="btn-outline">Переглянути програму</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ FOR WHOM -->
+<section class="section for-whom">
+  <div class="container">
+    <span class="section-eyebrow serif">Цей курс для тебе, якщо</span>
+    <h2 class="section-title serif">Ти впізнаєш себе<br>хоча б в одному</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <span class="card-icon">😶‍🌫️</span>
+        <p>Ти відчуваєш, що «загубилась» — робиш, рухаєшся, але не відчуваєш себе всередині цього</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔋</span>
+        <p>Ти виснажена. Не просто втомлена — а виснажена так, що не знаєш, звідки брати сили</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">😮‍💨</span>
+        <p>Тривога стала фоном. Ти «тягнеш» себе крізь день, і це забирає дуже багато</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌀</span>
+        <p>Ти не знаєш, чого хочеш — бажання кудись зникли або стали розмитими</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">💛</span>
+        <p>Ти хочеш піклуватись про себе, але не знаєш з чого почати — або «не маєш права»</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🌱</span>
+        <p>Ти хочеш знову відчути, що в житті є щось тепле і твоє — навіть у кризовий час</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ ABOUT -->
+<section class="section about">
+  <div class="container-sm">
+    <span class="section-eyebrow serif">Про курс</span>
+    <h2 class="section-title serif">Не вилікувати.<br>Повернути себе.</h2>
+
+    <div class="section-text">
+      <p>Цей курс не обіцяє «прибрати тривогу» або «зробити тебе щасливою». Тому що я — реальний психолог і знаю: так не буває.</p>
+    </div>
+
+    <div class="quote-block">
+      <p>«Те, що ти відчуваєш — логічно і закономірно в умовах, у яких ти живеш. Ти не зламана. Ти просто людина, якій потрібна опора.»</p>
+    </div>
+
+    <div class="section-text">
+      <p>Ми будемо йти маленькими, реалістичними кроками. Щодня — одна ідея, одна практика, одне питання до себе. Максимум 10 хвилин уваги.</p>
+      <p style="margin-top: 18px;">Без токсичної мотивації. Без «зберись». Без обіцянок, що після курсу все буде ідеально. З теплом, чесністю і повагою до твого темпу.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PROGRAM -->
+<section class="section program" id="program">
+  <div class="container">
+    <span class="section-eyebrow serif">Програма</span>
+    <h2 class="section-title serif">7 днів — 7 кроків<br>назустріч собі</h2>
+
+    <div class="days-list">
+      <div class="day-item">
+        <div class="day-num">01</div>
+        <div class="day-content">
+          <span class="day-emoji">🌱</span>
+          <div class="day-title serif">Я є. Просто є — і цього вже достатньо</div>
+          <p class="day-desc">Повертаємо першу точку опори — відчуття власної присутності. Нормалізуємо стан «я загубилась». Перша тілесна практика заземлення.</p>
+          <span class="day-tag">тілесна практика</span>
+        </div>
+      </div>
+      <div class="day-item">
+        <div class="day-num">02</div>
+        <div class="day-content">
+          <span class="day-emoji">🌬️</span>
+          <div class="day-title serif">Видихнути. Дозволити собі бути втомленою</div>
+          <p class="day-desc">Розбираємось, чому ми «забороняємо» собі визнавати втому. Дихальна практика для зняження напруги нервової системи.</p>
+          <span class="day-tag">дихальна практика</span>
+        </div>
+      </div>
+      <div class="day-item">
+        <div class="day-num">03</div>
+        <div class="day-content">
+          <span class="day-emoji">🤲</span>
+          <div class="day-title serif">Тіло — мій дім. Повернутись у себе</div>
+          <p class="day-desc">Чому ми «виходимо» з тіла під час стресу і як повернутись. Практика тілесного сканування «Я повертаюсь додому».</p>
+          <span class="day-tag">тілесне сканування</span>
+        </div>
+      </div>
+      <div class="day-item">
+        <div class="day-num">04</div>
+        <div class="day-content">
+          <span class="day-emoji">💭</span>
+          <div class="day-title serif">Мої думки — не я. Навчитись спостерігати</div>
+          <p class="day-desc">Когнітивна дистанція: як зменшити владу тривожних думок без боротьби з ними. Практика «Хмаринки».</p>
+          <span class="day-tag">когнітивна техніка</span>
+        </div>
+      </div>
+      <div class="day-item">
+        <div class="day-num">05</div>
+        <div class="day-content">
+          <span class="day-emoji">✨</span>
+          <div class="day-title serif">Маленькі радощі. Дозволити собі відчувати добре</div>
+          <p class="day-desc">Дозвіл на радість без провини. Чому радіти під час кризи — не зрада, а необхідність. «Банка радощів».</p>
+          <span class="day-tag">емоційна практика</span>
+        </div>
+      </div>
+      <div class="day-item">
+        <div class="day-num">06</div>
+        <div class="day-content">
+          <span class="day-emoji">🧭</span>
+          <div class="day-title serif">Чого я хочу? Повернення до власних бажань</div>
+          <p class="day-desc">Чому бажання «зникають» при тривалому стресі і як їх знову почути. Практика «Три питання до себе».</p>
+          <span class="day-tag">робота з бажаннями</span>
+        </div>
+      </div>
+      <div class="day-item">
+        <div class="day-num">07</div>
+        <div class="day-content">
+          <span class="day-emoji">🌸</span>
+          <div class="day-title serif">Я повертаюсь. Я продовжуюсь</div>
+          <p class="day-desc">Інтегруємо шлях тижня. Зміцнюємо нову точку опори. Практика «Листа собі» — що я хочу сказати собі майбутній.</p>
+          <span class="day-tag">інтегративна практика</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ RESULTS -->
+<section class="section results">
+  <div class="container">
+    <span class="section-eyebrow serif">Результати</span>
+    <h2 class="section-title serif">Що ти отримаєш<br>після курсу</h2>
+    <div class="results-grid">
+      <div class="result-item">
+        <h4 class="serif">Відчуття себе</h4>
+        <p>Перший контакт із собою — не «правильною», не «сильною», а живою і реальною</p>
+      </div>
+      <div class="result-item">
+        <h4 class="serif">Інструменти на щодень</h4>
+        <p>7 простих практик, які можна робити вдома, у будь-якому стані, навіть у важкі дні</p>
+      </div>
+      <div class="result-item">
+        <h4 class="serif">Менше влади тривоги</h4>
+        <p>Навичка спостерігати за думками без злипання — вони є, але вже не керують</p>
+      </div>
+      <div class="result-item">
+        <h4 class="serif">Дозвіл на відпочинок</h4>
+        <p>Внутрішній дозвіл бути втомленою, радіти, хотіти — без провини і стороннього схвалення</p>
+      </div>
+      <div class="result-item">
+        <h4 class="serif">Повернення бажань</h4>
+        <p>Перший контакт із власними бажаннями та відчуттям «чого я хочу»</p>
+      </div>
+      <div class="result-item">
+        <h4 class="serif">Опора в собі</h4>
+        <p>Відчуття «я є, я тут» — маленьке, але стійке. Власна точка опори в нестабільному часі</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ INCLUDES -->
+<section class="section includes">
+  <div class="container">
+    <span class="section-eyebrow serif">Що входить до курсу</span>
+    <h2 class="section-title serif">Все необхідне —<br>в одному місці</h2>
+    <div class="includes-grid">
+      <div class="include-card">
+        <span class="icon">🎥</span>
+        <h4 class="serif">7 відеоуроків</h4>
+        <p>Кожен — до 10 хвилин. Теплий психологічний тон, без зайвого. Зручно дивитись у будь-який час.</p>
+      </div>
+      <div class="include-card">
+        <span class="icon">📓</span>
+        <h4 class="serif">Робочий зошит</h4>
+        <p>PDF-зошит із практиками, питаннями для рефлексії та чеклістами на кожен день курсу.</p>
+      </div>
+      <div class="include-card">
+        <span class="icon">🌿</span>
+        <h4 class="serif">7 авторських технік</h4>
+        <p>Тілесні, дихальні, когнітивні, емоційні практики — прості, безпечні, до 3 хвилин виконання.</p>
+      </div>
+      <div class="include-card">
+        <span class="icon">♾️</span>
+        <h4 class="serif">Довічний доступ</h4>
+        <p>Повертайся до матеріалів у будь-який час — особливо в дні, коли знову буде важко.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container-sm">
+    <span class="section-eyebrow serif" style="text-align:center;display:block">Участь у курсі</span>
+    <h2 class="section-title serif" style="text-align:center">Приєднатись просто</h2>
+    <div class="pricing-card">
+      <div class="pricing-title serif">Повний курс</div>
+      <div class="pricing-sub">Доступ до всіх матеріалів одразу після оплати</div>
+      <div class="price serif"><span class="price-currency">299 грн</span></div>
+      <div class="price-note">або 6,75 $ / 5,79 €</div>
+      <div class="pricing-features">
+        <div class="pricing-feature"><span class="check">✓</span> 7 відеоуроків (до 10 хв кожен)</div>
+        <div class="pricing-feature"><span class="check">✓</span> Робочий зошит учасниці (PDF)</div>
+        <div class="pricing-feature"><span class="check">✓</span> 7 авторських практик</div>
+        <div class="pricing-feature"><span class="check">✓</span> Довічний доступ до матеріалів</div>
+        <div class="pricing-feature"><span class="check">✓</span> Можна проходити у власному темпі</div>
+      </div>
+      <a href="https://secure.wayforpay.com/button/b1480fc3d1ff4" class="btn-cta">Приєднатись до курсу</a>
+      <div class="guarantee">Безпечна оплата · Доступ одразу після реєстрації</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ FAQ -->
+<section class="section faq">
+  <div class="container-sm">
+    <span class="section-eyebrow serif">Питання і відповіді</span>
+    <h2 class="section-title serif">Часто запитують</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q serif">Чи підійде курс, якщо мені зараз дуже важко?</div>
+        <p class="faq-a">Так. Курс саме для цього стану — він не вимагає сил, яких у тебе немає. Кожен урок короткий, кожна практика реалістична. Якщо в якийсь день нема змоги дивитись — нічого страшного. Ти можеш повернутись у будь-який час.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q serif">Це замінює терапію?</div>
+        <p class="faq-a">Ні. Курс — це підтримка і самодопомога, а не терапія. Якщо у тебе є виражені симптоми тривоги, депресії або ПТСР — важливо також звернутись до спеціаліста. Курс може бути доповненням до роботи з психологом.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q serif">Скільки часу потрібно щодня?</div>
+        <p class="faq-a">До 10 хвилин на відеоурок + 5–10 хвилин на практику та зошит. Загалом — 15–20 хвилин на день. Можна ділити: урок вранці, зошит увечері.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q serif">Що, якщо я не встигну за 7 днів?</div>
+        <p class="faq-a">Нічого. У тебе є довічний доступ. Можна проходити за 7 днів, можна за 2 тижні, можна повертатись до окремих уроків. Твій темп — правильний.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q serif">Я вже ходжу до психолога. Чи варто мені цей курс?</div>
+        <p class="faq-a">Курс може чудово доповнювати індивідуальну роботу. Практики між сесіями, додаткова рефлексія, конкретні інструменти для щоденного самопідтримки — це те, що курс дає добре.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════ FOOTER CTA -->
+<section class="footer-cta">
+  <div class="container-sm">
+    <h2 class="serif">Ти заслуговуєш на <em>увагу до себе</em></h2>
+    <p>Не менше, ніж ті, про кого ти піклуєшся</p>
+    <a href="https://secure.wayforpay.com/button/b1480fc3d1ff4" class="btn-primary">Приєднатись до курсу</a>
+  </div>
+</section>
+
+<footer>
+  <p>Курс «Відновлення та пошук себе під час війни» · Онлайн · Довічний доступ</p>
+  <p style="margin-top:8px;font-size:11px;opacity:0.5">Матеріали курсу є інформаційно-підтримувальними і не замінюють індивідуальну психологічну або медичну допомогу</p>
+</footer>
+
+</body>
+</html>
